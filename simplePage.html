@@ -1,29 +1,118 @@
 <!DOCTYPE html>
 <html>
+<style>
+table {
+  font-size: 18px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #4b4949;
+  text-align: center;
+  padding: 8px;
+}
+
+button.Newuser{
+    color: rgb(0, 0, 0);
+    background-color: rgba(35, 238, 245, 0.74);
+    border-radius: 15px;
+    border-color: rgba(35, 238, 245, 0.74);
+}
+
+button.Submituser{
+    color: rgb(0, 0, 0);
+    background-color: rgba(247, 145, 29, 0.74);
+    border-radius: 15px;
+    border-color: rgba(247, 145, 29, 0.74);;
+}
+
+
+
+
+
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 <script>
-    var app = angular.module("myShoppingList", []);
-    app.controller("myCtrl", function ($scope) {
-        $scope.products = ["Milk", "Bread", "Cheese"];
-        $scope.addItem = function () {
-            $scope.errortext = "";
-            if (!$scope.addMe) { return; }
-            if ($scope.products.indexOf($scope.addMe) == -1) {
-                $scope.products.push($scope.addMe);
-            } else {
-                $scope.errortext = "The item is already in your shopping list.";
+    var app = angular.module("main", []);
+    app.controller("main_ctrl", function ($scope) {
+        $scope.users = [
+            {name : "a", age : "12"},
+            {name : "b", age : "2"},
+            {name : "c", age : "3"}
+        ];
+
+        $scope.addNew = true;
+
+        $scope.addNewUser = function(){
+            let out = false;
+            out = confirm("Once the users data is init to the system, there is no way to change it. If okay, please click on OK");
+        
+            if(out){
+                $scope.users.push({name: $scope.userName, age:$scope.userAge});
             }
-        }
-        $scope.removeItem = function (x) {
-            $scope.errortext = "";
-            $scope.products.splice(x, 1);
-        }
+        };
+
+        $scope.del = function(i){
+            $scope.users.splice(i,1);
+        };
+
+        // $scope.addItem = function () {
+        //     $scope.errortext = "";
+        //     if (!$scope.addMe) { return; }
+        //     if ($scope.products.indexOf($scope.addMe) == -1) {
+        //         $scope.products.push($scope.addMe);
+        //     } else {
+        //         $scope.errortext = "The item is already in your shopping list.";
+        //     }
+        // }
+        // $scope.removeItem = function (x) {
+        //     $scope.errortext = "";
+        //     $scope.products.splice(x, 1);
+        // }
     });
 </script>
 
-<body>
+<body style="background-color: rgb(247, 247, 247); color: black;">
     <div ng-app="main" ng-controller="main_ctrl">
+        <div>
+            <table class="table table-bordered">
+                <thead>
+                    <th style="width: 50px;"> </th>
+                    <th style="width: 200px;">Name</th>
+                    <th style="width: 200px;">Age</th>
+                </thead>
+                <tbody>
+                   <tr ng-repeat="x in users">
+                        <td><span ng-click="del($index)">x </span>{{$index+1}} </td>
+                        <td>{{x.name}}</td>
+                        <td>{{x.age}}</td>
+                   </tr>
+                </tbody>
+            </table>
+        </div>
 
+        <div style="margin-top: 20px;">
+            <button class="Newuser" ng-click="addNew = !addNew">Add New User</button>
+        </div>
+
+        <div ng-hide="addNew" style="margin-top: 10px; display: block;">
+            <div>                
+                <label>
+                    Name :
+                    <input type="text" ng-model="userName" required>
+                </label>
+            </div>
+            <div style="margin-top: 5px; margin-bottom: 5px;">
+                <label>
+                    Age : 
+                    <input type="text" ng-model="userAge" required>
+                </label>
+            </div>       
+            
+            <button class="Submituser" ng-click="addNewUser()">Submit</button>
+        </div>
+        
     </div>
 
 </body>

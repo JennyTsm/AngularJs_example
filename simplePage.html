@@ -45,12 +45,8 @@ button.Submituser{
         $scope.addNew = true;
 
         $scope.addNewUser = function(){
-            let out = false;
-            out = confirm("Once the users data is init to the system, there is no way to change it. If okay, please click on OK");
-        
-            if(out){
-                $scope.users.push({name: $scope.userName, age:$scope.userAge});
-            }
+            $scope.users.push({name: $scope.userName, age:$scope.userAge});
+            
         };
 
         $scope.del = function(i){

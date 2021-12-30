@@ -27,7 +27,13 @@ button.Submituser{
     border-color: rgba(247, 145, 29, 0.74);;
 }
 
+button.cancel{
+    color: rgb(0, 0, 0);
+    background-color: rgba(87, 88, 88, 0.74);
+    border-radius: 15px;
+    border-color:  rgba(87, 88, 88, 0.74);
 
+}
 
 
 
@@ -43,6 +49,7 @@ button.Submituser{
         ];
 
         $scope.addNew = true;
+        $scope.cancel = true;
 
         $scope.addNewUser = function(){
             $scope.users.push({name: $scope.userName, age:$scope.userAge});
@@ -52,6 +59,12 @@ button.Submituser{
         $scope.del = function(i){
             $scope.users.splice(i,1);
         };
+
+        $scope.buttonHandle = function(){
+            $scope.addNew = !$scope.addNew;
+            $scope.cancel = !$scope.cancel;
+
+        }
 
         // $scope.addItem = function () {
         //     $scope.errortext = "";
@@ -88,11 +101,12 @@ button.Submituser{
             </table>
         </div>
 
-        <div style="margin-top: 20px;">
-            <button class="Newuser" ng-click="addNew = !addNew">Add New User</button>
+        <div style="margin-top: 20px;" ng-show="cancel">
+            <button class="Newuser" ng-click="buttonHandle()">Add New User</button>
         </div>
 
         <div ng-hide="addNew" style="margin-top: 10px; display: block;">
+            
             <div>                
                 <label>
                     Name :
@@ -105,8 +119,12 @@ button.Submituser{
                     <input type="text" ng-model="userAge" required>
                 </label>
             </div>       
-            
-            <button class="Submituser" ng-click="addNewUser()">Submit</button>
+            <div>
+                <button class="Submituser" ng-click="addNewUser()">Submit</button>
+
+                <button class="cancel" ng-click="buttonHandle()">Cancal</button>
+            </div>
+           
         </div>
         
     </div>

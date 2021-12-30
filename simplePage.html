@@ -52,6 +52,8 @@ button.cancel{
         $scope.cancel = true;
 
         $scope.addNewUser = function(){
+            
+
             $scope.users.push({name: $scope.userName, age:$scope.userAge});
             
         };
@@ -63,6 +65,8 @@ button.cancel{
         $scope.buttonHandle = function(){
             $scope.addNew = !$scope.addNew;
             $scope.cancel = !$scope.cancel;
+            $scope.userName = "";
+            $scope.userAge = "";
 
         }
 

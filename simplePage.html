@@ -50,11 +50,12 @@ button.cancel{
 
         $scope.addNew = true;
         $scope.cancel = true;
+        $scope.errorMsg = false;
 
         $scope.addNewUser = function(){
             let dataValid = true;
             isNaN($scope.userAge)? dataValid = false: null;
-            
+
             if(dataValid){
                 $scope.users.push({name: $scope.userName, age:$scope.userAge});
                 $scope.errorMsg = false;

@@ -52,9 +52,15 @@ button.cancel{
         $scope.cancel = true;
 
         $scope.addNewUser = function(){
+            let dataValid = true;
+            isNaN($scope.userAge)? dataValid = false: null;
             
-
-            $scope.users.push({name: $scope.userName, age:$scope.userAge});
+            if(dataValid){
+                $scope.users.push({name: $scope.userName, age:$scope.userAge});
+                $scope.errorMsg = false;
+            }else{
+                $scope.errorMsg = true;
+            }           
             
         };
 
@@ -122,7 +128,10 @@ button.cancel{
                     Age : 
                     <input type="text" ng-model="userAge" required>
                 </label>
-            </div>       
+            </div> 
+            <div ng-show="errorMsg" style="color: red;">
+                data not true. Please check your input!
+            </div>      
             <div>
                 <button class="Submituser" ng-click="addNewUser()">Submit</button>
 
